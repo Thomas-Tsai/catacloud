@@ -1,0 +1,18 @@
+<?
+$cmarc4_data = explode(":", $this->detail{"value"});
+echo "cmarc4 $this->UUID<br>\n";
+
+$Cmarc4 = new Application_Model_DbTable_Cmarc4structure();
+foreach ($cmarc4_data as $field){
+	list($tagfield, $tagsubfield, $value) = explode(",", $field);
+	$desc = $Cmarc4->getDesc($tagfield,$tagsubfield);
+	echo "$tagfield $tagsubfield $desc $value<br>\n";
+    }
+?>
+<hr>
+
+<a href="convert">convert</a><br>
+
+<a href="/cmarc4/edit/UUID/<?=$this->UUID?>">edit</a><br>
+
+<a href="/cmarc4/delete/UUID/<?=$this->UUID?>">delete</a><br>

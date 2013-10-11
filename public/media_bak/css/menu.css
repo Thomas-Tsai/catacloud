@@ -1,0 +1,42 @@
+#vertical_menu {
+list-style: none;
+}
+#vertical_menu li {
+margin: 5px;
+}
+#vertical_menu li ul {
+padding: 10px 15px;
+list-style: none;
+}
+#horizontal_menu {
+margin: 0;
+padding: 0;
+list-style: none;
+position: relative;
+width: 500px;
+float: left;
+}
+#horizontal_menu li {
+margin: 0;
+padding: 0;
+float: left;
+       border-right: 1px ;
+}
+#horizontal_menu li a {
+padding: 10px 15px;
+display: block;
+	 text-decoration: none;
+}
+#horizontal_menu li ul {
+margin: 0;
+padding: 15px 0;
+list-style: none;
+float: left;
+position: absolute;
+left: 0;
+width: 500px;
+display: none;
+}
+#horizontal_menu li ul li { border-right: 1px }
+#horizontal_menu li ul li a { display: inline; }
+#horizontal_menu li ul li a:hover { text-decoration: underline; }

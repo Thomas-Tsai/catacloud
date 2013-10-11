@@ -1,0 +1,27 @@
+<?php 
+$this->title = "CMARC3 書目資料";
+$this->headTitle($this->title);
+Zend_Layout::getMvcInstance()->assign('subtitle', $this->title);
+Zend_Layout::getMvcInstance()->assign('subdesc', '最近關於 CMARC3 書目的相關資料');
+$auth = Zend_Auth::getInstance ();
+?>
+<br>
+<a href="/cmarc3/add/">新增</a>
+<hr>
+
+<table class="main_table" border="0" width="98%">
+<tr>
+<th>user</th><th>UUID</th><th>type</th><th>action</th><th>date</th>
+</tr>
+<?php  foreach ($this->data as $data): ?>
+<tr>
+<td><?php echo $data->user; ?></td>
+<td><a href="/cmarc3/detail/UUID/<?=$data->UUID?>"><?=$data->UUID?></a></td>
+<td><?php echo $data->type; ?></td>
+<td><?php echo $data->action; ?></td>
+<td><?php echo $data->date; ?></td>
+</tr>
+<?php  endforeach;?>
+</table>
+
+<?php echo $this->paginationControl($this->data,'Sliding','/index/pc.phtml'); ?>

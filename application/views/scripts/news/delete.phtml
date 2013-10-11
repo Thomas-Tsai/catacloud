@@ -1,0 +1,15 @@
+<?php 
+$this->title = "刪除最新消息";
+$this->headTitle($this->title);
+Zend_Layout::getMvcInstance()->assign('subtitle', $this->title);
+?>
+<p>是否刪除公告 "<?php echo strip_tags($this->news['title']); ?>" ?</p>
+
+<form action="<?php echo $this->url(array('action'=>'delete')); ?>" method="post" >
+<div>
+<input type="hidden" name="id" value="<?php echo $this->news['id'];?>">
+<input type="hidden" name="site" value="<?php echo $this->news['site'];?>">
+<button type="submit" name="del" value="Yes" id="button">確認</button>
+<button type="submit" name="del" value="No" id="button">取消</button>
+</div>
+</form>

@@ -1,0 +1,31 @@
+<?
+$this->title = "MARC21 書目資料";
+$this->headTitle($this->title);
+Zend_Layout::getMvcInstance()->assign('subtitle', $this->title);
+Zend_Layout::getMvcInstance()->assign('subdesc', '最近關於 MARC21 書目的相關資料');
+$auth = Zend_Auth::getInstance ();
+$bib = new Application_Model_Biblio();
+?>
+
+<br>
+<a href="/marc21/add/">新增</a>
+<hr>
+
+<table class="main_table" border="1" width="98%">
+<tr>
+</tr>
+<?php  foreach ($this->data as $data): ?>
+<tr>
+<td colspan="2"><a href="/marc21/detail/UUID/<?=$data->UUID?>"><?=$data->title?></a></td>
+<td colspan="2"><?=$data->author?>
+</tr>
+<tr>
+<td><?php echo $bib->NameOfUser($data->user); ?></td>
+<td><?php echo $bib->NameOfLibrary($data->lib); ?></td>
+<td><?php echo $bib->NameOfAction($data->action, $data->type); ?></td>
+<td><?php echo $data->date; ?></td>
+</tr>
+<?php  endforeach;?>
+</table>
+
+<?php echo $this->paginationControl($this->data,'Sliding','/index/pc.phtml'); ?>

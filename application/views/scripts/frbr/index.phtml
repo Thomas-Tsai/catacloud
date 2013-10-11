@@ -1,0 +1,19 @@
+<br>
+<a href="/frbr/add/">新增</a>
+<hr>
+
+<table class="main_table" border="0" width="98%">
+<tr>
+<th>user</th><th>UUID</th><th>type</th><th>action</th><th>date</th>
+</tr>
+<?php  foreach ($this->data as $data): ?>
+<tr>
+<td><?php echo $data->user; ?></td>
+<td><a href="/frbr/detail/UUID/<?=$data->UUID?>"><?=$data->UUID?></a></td>
+<td><?php echo $data->type; ?></td>
+<td><?php echo $data->action; ?></td>
+<td><?php echo $data->date; ?></td>
+</tr>
+<?php  endforeach;?>
+</table>
+

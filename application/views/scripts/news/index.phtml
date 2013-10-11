@@ -1,0 +1,34 @@
+<?php 
+$this->title = "最新消息";
+$this->headTitle($this->title);
+Zend_Layout::getMvcInstance()->assign('subtitle', $this->title);
+Zend_Layout::getMvcInstance()->assign('subdesc', '本站開發進度與最新消息');
+$auth = Zend_Auth::getInstance ();
+?>
+<table>
+<tr>
+<th>標題</th>
+<th>日期</th>
+<?php if ($auth->hasIdentity()): ?>
+<th colspan="3"><a href="<?php echo $this->url(array('controller'=>'news','action'=>'add'));?>">新增消息</a></th>
+<? else: ?>
+<th colspan="3"></th>
+<?php endif;?>
+</tr>
+<?php  foreach ($this->news as $news): ?>
+<tr>
+<td><?php echo $news->title; ?></td>
+<td><?php echo $news->data; ?></td>
+<td><?php echo $this->escape($news->date); ?></td>
+<?php if ($auth->hasIdentity()): ?>
+<td><a class="subadmin" href="<?php echo $this->url(array('controller'=>'news','action'=>'edit','id'=>$news->id));?>">編輯</a></td>
+<td><a class="subadmin" href="<?php echo $this->url(array('controller'=>'news','action'=>'delete','id'=>$news->id));?>">刪除</a></td>
+</tr>
+<?php else: ?>
+<td></td>
+<td></td>
+<?php endif; ?>
+<?php  endforeach;?>
+</table>
+<hr>
+<?php echo $this->paginationControl($this->news,'Sliding','/index/pc.phtml'); ?>

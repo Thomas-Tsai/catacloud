@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+
+Name       : StylePrecision 
+Description: A two-column, fixed-width design with dark color scheme.
+Version    : 1.0
+Released   : 20130720
+
+-->
+<?php  
+$this->headMeta()->appendHttpEquiv('Content-type', 'text/html;charset=utf-8');
+$this->headTitle()->setSeparator(' - ');
+$this->headTitle('書目資料管理平台');
+$auth = Zend_Auth::getInstance ();
+echo $this->doctype();
+?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-tw" lang="zh-tw">
+<head>
+<?php echo $this->headMeta()."\n"; ?>
+<?php echo $this->headTitle()."\n"; ?>
+<?php echo $this->layout()->scriptTags;?>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700|Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
+<link href="/style.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="/fonts.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="/jquery.slidertron-1.1.js"></script>
+</head>
+<body>
+<div id="wrapper">
+	<div id="page" class="container">
+		<div id="header" class="container">
+			<div id="logo">
+				<h1><a href="/news/">雲端編目系統</a></h1>
+			</div>
+			<div id="menu">
+				<ul>
+					<li><a href="/cmarc3/">CMARC3</a></li>
+					<li><a href="/cmarc4/">CMARC4</a></li>
+					<li><a href="/marc21/">MARC21</a></li>
+					<li><a href="/dublincore/">DC</a></li>
+					<li><a href="/frbe/">FRBR</a></li>
+				</ul>
+			</div>
+		</div>
+		<div id="banner">
+			<div id="slider">
+				<div class="viewer">
+					<div class="reel">
+						<div class="slide"> <img src="/images/cat1.png" alt="" /> </div>
+						<div class="slide"> <img src="/images/cat2.png" alt="" /> </div>
+					</div>
+				</div>
+			</div>
+			<script type="text/javascript">
+				$('#slider').slidertron({
+					viewerSelector: '.viewer',
+					reelSelector: '.viewer .reel',
+					slidesSelector: '.viewer .reel .slide',
+					advanceDelay: 3000,
+					speed: 'slow'
+				});
+			</script> 
+		</div>
+		<div id="content">
+			<div class="title">
+				<h2><?php echo $this->layout()->subtitle; ?></h2>
+				<span class="byline"><?php echo $this->layout()->subdesc; ?></span> </div>
+			
+            <?php echo $this->layout()->content; ?>
+		</div>
+		<div id="sidebar">
+			<div class="box1">
+				<div class="title">
+					<h2>新增書目</h2>
+				</div>
+				<ul class="style2">
+				<?
+				$meta = new Application_Model_DbTable_MetaData();
+				$new = $meta->newdata();
+				$bib = new Application_Model_Biblio();
+				foreach ($new as $data) {
+				    $link = $bib->LinkOfUUID($data->UUID);
+				    echo "<li><a href=\"$link\">$data->title $data->author</a></li>";    
+				}
+				?>
+				</ul>
+			</div>
+			<div class="box2">
+				<div class="title">
+					<h2>熱門書目</h2>
+				</div>
+				<ul class="style2">
+				<?
+				$meta = new Application_Model_DbTable_MetaData();
+				$popular = $meta->populardata();
+				$bib = new Application_Model_Biblio();
+				foreach ($popular as $data) {
+				    $link = $bib->LinkOfUUID($data->UUID);
+				    echo "<li><a href=\"$link\">$data->title $data->author</a></li>";    
+				}
+				?>
+				</ul>
+					<!--<a href="#" class="icon icon-file-alt button">Read More</a> -->
+					</div>
+			<div class="box2">
+				<div class="title">
+					<h2>使用者資訊</h2>
+				</div>
+				<ul class="style2">
+					<? if ($auth->hasIdentity ()): ?>
+					<li><a href="/user/logout">登出</a></li>
+					<li><a href="/user/edit">編輯</a></li>
+					<li><a href="/user/info">檢視</a></li>
+					<? else: ?>
+					<li><a href="/user/login">登入</a></li>
+					<? endif; ?>
+				</ul>
+				</div>
+		</div>
+	</div>
+	<!-- end #page --> 
+</div>
+<div id="footer">
+	<p>Copyright (c) 2013 <a href="http://www.nchc.org.tw/">NARLabs.org</a>. All rights reserved. | Develop by <a href="www.libthomas.org">Thomas Tsai</a>  | Design by <a href="http://www.freecsstemplates.org/" rel="nofollow">FreeCSSTemplates.org</a>.</p>
+</div>
+<!-- end #footer -->
+</body>
+</html>

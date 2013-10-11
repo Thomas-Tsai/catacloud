@@ -1,0 +1,7 @@
+<?php
+$this->title = "新增編目員";
+$this->headTitle($this->title); 
+Zend_Layout::getMvcInstance()->assign('subtitle', $this->title);
+if(isset($this->error)){echo "<font class=\"errors\">$this->error</font>";}
+echo $this->form;   
+?>

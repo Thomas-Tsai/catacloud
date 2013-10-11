@@ -1,0 +1,12 @@
+<?php
+$this->title = "登入";
+$this->headTitle($this->title); 
+Zend_Layout::getMvcInstance()->assign('subtitle', $this->title);
+if(isset($this->error)){echo "<font class=\"errors\">$this->error</font>";}
+$session = new Zend_Session_Namespace('cata');
+if ($session->name){
+echo "$session->name login successful";
+echo "<a href=\"/user/logout\">登出</a>";
+}else
+echo $this->form;   
+?>

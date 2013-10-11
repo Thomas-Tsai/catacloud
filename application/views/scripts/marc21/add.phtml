@@ -1,0 +1,16 @@
+<?php
+$this->title = "編輯";
+$this->headTitle($this->title); 
+Zend_Layout::getMvcInstance()->assign('subtitle', $this->title);
+if(isset($this->error)){echo "<font class=\"errors\">$this->error</font>";}
+$session = new Zend_Session_Namespace('cata');
+if ($session->name){
+echo $this->form;
+echo "$session->name login successful";
+echo "<a href=\"/user/logout\">登出</a>";
+echo "<a href=\"/marc21/add/edit_style/adv\">進階</a>";
+echo "<a href=\"/marc21/add/edit_style/basic\">基礎</a>";
+}else
+echo "<a href=\"/user/logout\">登出</a>";
+
+?>
